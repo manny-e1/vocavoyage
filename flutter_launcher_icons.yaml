@@ -1,0 +1,7 @@
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/appstore.png"  # For iOS
+  adaptive_icon_background: "#fff"  # Background color
+  adaptive_icon_foreground: "assets/appstore.png"  # New full-size image
+  remove_alpha_ios: true

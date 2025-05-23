@@ -26,7 +26,9 @@ class AIService {
                     * V1: I **go** to school every day.
                     * V2:  She **went** to the park yesterday.
                     * V3:  They have **gone** home.
-                  * **Multiple Choice Questions:**  
+                  * **Multiple Choice Questions:** (the choices must be single words preferably the verbs and follow the following structure)
+                    1. Question 1?
+                        a) choice 1 b) choice 2 c) choice 3 d) choice 4
                   * **Explanation:** the explanation
                   * **Answer key:** the answers like 1: c, 2: d, 3: a, 4: b, 5: d
               $seenWordsText

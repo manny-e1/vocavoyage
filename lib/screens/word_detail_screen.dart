@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vocavoyage/screens/main_screen.dart';
 import 'package:vocavoyage/services/parser.dart';
 import 'package:vocavoyage/services/tts_service.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -115,7 +116,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                       Text(
                         form,
                         style: GoogleFonts.poppins(
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color:
                               Theme.of(context).colorScheme.onPrimaryContainer,
@@ -435,14 +436,15 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                       ),
                       const SizedBox(width: 12),
                       Expanded(
-                        child: Text(
-                          example,
-                          style: GoogleFonts.poppins(
+                        child: SentenceDisplay(
+                          sentence: example.split(":")[1].trim(),
+                          textStyle: GoogleFonts.poppins(
                             fontSize: 16,
                             height: 1.5,
                             fontStyle: FontStyle.italic,
                             color: Colors.grey[800],
                           ),
+                          padding: 0,
                         ),
                       ),
                     ],
@@ -512,7 +514,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                     child: Text(
                       word,
                       style: GoogleFonts.poppins(
-                        fontSize: 32,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -563,7 +565,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         leading: IconButton(
           icon: Container(

@@ -34,10 +34,12 @@ dependencies:
   flutter_animate: ^4.5.0
   flutter_dotenv: ^5.2.1
   flutter_gemini: ^3.0.0
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.6
   flutter_svg: ^2.0.9
   flutter_tts: ^3.8.5
   google_fonts: ^6.1.0
-  lottie: ^2.7.0
+  lottie: ^3.3.1
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
 

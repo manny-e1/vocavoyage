@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   // Define a gradient for the AppBar
   final LinearGradient _appBarGradient = const LinearGradient(
-    colors: [Color(0xFF4E54C8), Color(0xFF8F94FB)],
+    colors: [Color.fromARGB(255, 121, 78, 200), Color(0xFF8F94FB)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -81,7 +81,7 @@ class _MainScreenState extends State<MainScreen>
           ),
         ),
         title: const Text(
-          'VocaVoyage',
+          'Voca Voyage',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -305,6 +305,7 @@ class _MainScreenState extends State<MainScreen>
                                     ),
                                   const SizedBox(height: 12),
                                   Container(
+                                    width: double.maxFinite,
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
                                       color: Theme.of(
@@ -337,16 +338,15 @@ class _MainScreenState extends State<MainScreen>
                                         ),
                                         const SizedBox(height: 4),
                                         ...wordData.examples.map(
-                                          (e) => Text(
-                                            e,
-                                            style: TextStyle(
-                                              fontStyle: FontStyle.italic,
+                                          (e) => SentenceDisplay(
+                                            sentence:
+                                                '${wordData.examples.indexOf(e) + 1}. ${e.split(":")[1].trim()}',
+                                            textStyle: TextStyle(
                                               fontSize: 15,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSurface
-                                                  .withOpacity(0.9),
-                                              height: 1.4,
+                                              color:
+                                                  Theme.of(
+                                                    context,
+                                                  ).colorScheme.onSurface,
                                             ),
                                           ),
                                         ),
@@ -433,6 +433,58 @@ class _MainScreenState extends State<MainScreen>
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SentenceDisplay extends StatelessWidget {
+  final String sentence;
+  final TextStyle textStyle;
+  final double padding;
+  const SentenceDisplay({
+    super.key,
+    required this.sentence,
+    required this.textStyle,
+    this.padding = 8,
+  });
+
+  List<TextSpan> _parseSentence(String text, BuildContext context) {
+    List<TextSpan> spans = [];
+    RegExp exp = RegExp(r'\*\*(.*?)\*\*');
+    int lastIndex = 0;
+
+    for (var match in exp.allMatches(text)) {
+      if (match.start > lastIndex) {
+        spans.add(
+          TextSpan(
+            text: text.substring(lastIndex, match.start),
+            style: textStyle,
+          ),
+        );
+      }
+      spans.add(
+        TextSpan(
+          text: match.group(1),
+          style: textStyle.copyWith(fontWeight: FontWeight.bold),
+        ),
+      );
+      lastIndex = match.end;
+    }
+
+    if (lastIndex < text.length) {
+      spans.add(TextSpan(text: text.substring(lastIndex), style: textStyle));
+    }
+
+    return spans;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(padding),
+      child: RichText(
+        text: TextSpan(children: _parseSentence(sentence, context)),
       ),
     );
   }
